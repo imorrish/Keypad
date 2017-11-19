@@ -83,19 +83,95 @@ bool Keypad::getKeys() {
 void Keypad::scanKeys() {
 	// Re-intialize the row pins. Allows sharing these pins with other hardware.
 	for (byte r=0; r<sizeKpd.rows; r++) {
-		pin_mode(rowPins[r],INPUT_PULLUP);
+		pin_mode(rowPins[r],INPUT);
 	}
 
 	// bitMap stores ALL the keys that are being pressed.
+	//pin_mode(14,OUTPUT);
+	//pin_mode(15,OUTPUT);
+	//pin_mode(16,OUTPUT);
+	//pin_mode(17,OUTPUT);
+	//pin_mode(18,OUTPUT);
+	//for (byte c=0; c<2; c++) {
 	for (byte c=0; c<sizeKpd.columns; c++) {
-		pin_mode(columnPins[c],OUTPUT);
-		pin_write(columnPins[c], LOW);	// Begin column pulse output.
-		for (byte r=0; r<sizeKpd.rows; r++) {
-			bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+		switch(c)
+		{
+		case 0:
+			
+				// Begin column pulse output.
+				pin_write(A0, LOW);
+				pin_write(A1, LOW);
+				pin_write(A2, LOW);
+				pin_write(A3, LOW);
+				pin_write(A4, LOW);
+				for (byte r=0; r<sizeKpd.rows; r++) {
+					bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+				}
+				pin_write(A4, HIGH);
+				break;
+		case 1:
+			
+				// Begin column pulse output.
+				pin_write(A0, HIGH);
+				pin_write(A1, LOW);
+				pin_write(A2, LOW);
+				pin_write(A3, LOW);
+				pin_write(A4, LOW);
+				for (byte r=0; r<sizeKpd.rows; r++) {
+					bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+				}
+				pin_write(A4, HIGH);
+				break;
+		case 2:
+			
+				// Begin column pulse output.
+				pin_write(A0, LOW);
+				pin_write(A1, HIGH);
+				pin_write(A2, LOW);
+				pin_write(A3, LOW);
+				pin_write(A4, LOW);
+				for (byte r=0; r<sizeKpd.rows; r++) {
+					bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+				}
+				pin_write(A4, HIGH);
+				break;
+		case 3:
+			
+				// Begin column pulse output.
+				pin_write(A0, HIGH);
+				pin_write(A1, HIGH);
+				pin_write(A2, LOW);
+				pin_write(A3, LOW);
+				pin_write(A4, LOW);
+				for (byte r=0; r<sizeKpd.rows; r++) {
+					bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+				}
+				pin_write(A4, HIGH);
+				break;
+		case 4:
+			
+					// Begin column pulse output.
+				pin_write(A0, LOW);
+				pin_write(A1, LOW);
+				pin_write(A2, HIGH);
+				pin_write(A3, LOW);
+				pin_write(A4, LOW);
+				for (byte r=0; r<sizeKpd.rows; r++) {
+					bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+				}
+				pin_write(A4, HIGH);
+				break;
 		}
 		// Set pin to high impedance input. Effectively ends column pulse.
-		pin_write(columnPins[c],HIGH);
-		pin_mode(columnPins[c],INPUT);
+		//pin_write(14, HIGH);
+		//pin_write(15, HIGH);	// Begin column pulse output.
+		//pin_write(16, HIGH);
+		pin_write(A3, HIGH);
+		pin_write(A4, HIGH);
+		//pin_mode(15,INPUT);
+		//pin_mode(16,INPUT);
+		//pin_mode(17,INPUT);
+		//pin_mode(18,INPUT);
 	}
 }
 
