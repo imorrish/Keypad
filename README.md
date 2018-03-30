@@ -1,7 +1,8 @@
 ## Keypad library for Arduino
 
 **Authors:**  *Mark Stanley***,** *Alexander Brevig*
-
+Updated by Ian Morrish - **total hack and hard coded version**
+To use BCD decoder for row selection. I need to create my own library rather than overwriting the keypad.cpp file!
 
 This repository is a copy of the code found here [[Arduino Playground]](http://playground.arduino.cc/Code/Keypad).
 
